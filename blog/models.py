@@ -1,17 +1,28 @@
 from django.db import models
 from django_postgres_unlimited_varchar import UnlimitedCharField
+from django.utils import timezone
+
+
+class Tag(models.Model):
+    tag = models.SlugField(unique=True)
+
+    def __str__(self):
+        return self.tag
 
 
 class BaseModel(models.Model):
-    created = models.DateTimeField(default=timezone.now, auto_now_add=True)
+    created = models.DateTimeField(default=timezone.now)
+    tags = models.ManyToManyField(Tag, blank=True)
     slug = models.SlugField(max_length=64)
 
     # TODO: Add longitude & latitude to base model
 
-    # TODO: Add tags to base model
+    class Meta:
+        abstract = True
+        ordering = ("-created",)
 
 
-class Series(models.Model()):
+class Series(models.Model):
     title = UnlimitedCharField()
     slug = models.SlugField()
     description = models.TextField(blank=True)
@@ -51,11 +62,14 @@ class Entry(BaseModel):
     def __str__(self):
         return self.title
 
+    class Meta:
+        verbose_name_plural = "Entries"
+
 
 class Quotation(BaseModel):
     quotation = models.TextField()
     source = models.CharField(max_length=255)
-    source_url = models.UnlimitedCharField(blank=True, null=True)
+    source_url = UnlimitedCharField(blank=True, null=True)
 
     def __str__(self):
         return self.quotation
