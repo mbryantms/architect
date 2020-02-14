@@ -10,9 +10,11 @@ django = "^3.0.3"
 whitenoise = "^5.0.1"
 psycopg2-binary = "^2.8.4"
 gunicorn = "^20.0.4"
+django-postgres-unlimited-varchar = "^1.1.0"
 
 [tool.poetry.dev-dependencies]
 django-environ = "^0.4.5"
+black = {version = "^19.10b0", allow-prereleases = true}
 
 [build-system]
 requires = ["poetry>=0.12"]
