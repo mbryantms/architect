@@ -6,39 +6,46 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('blog', '0001_initial'),
+        ("blog", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Tag',
+            name="Tag",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('tag', models.SlugField(unique=True)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("tag", models.SlugField(unique=True)),
             ],
         ),
         migrations.AlterModelOptions(
-            name='entry',
-            options={'verbose_name_plural': 'Entries'},
+            name="entry", options={"verbose_name_plural": "Entries"},
         ),
         migrations.AddField(
-            model_name='blogmark',
-            name='tags',
-            field=models.ManyToManyField(blank=True, to='blog.Tag'),
+            model_name="blogmark",
+            name="tags",
+            field=models.ManyToManyField(blank=True, to="blog.Tag"),
         ),
         migrations.AddField(
-            model_name='entry',
-            name='tags',
-            field=models.ManyToManyField(blank=True, to='blog.Tag'),
+            model_name="entry",
+            name="tags",
+            field=models.ManyToManyField(blank=True, to="blog.Tag"),
         ),
         migrations.AddField(
-            model_name='photo',
-            name='tags',
-            field=models.ManyToManyField(blank=True, to='blog.Tag'),
+            model_name="photo",
+            name="tags",
+            field=models.ManyToManyField(blank=True, to="blog.Tag"),
         ),
         migrations.AddField(
-            model_name='quotation',
-            name='tags',
-            field=models.ManyToManyField(blank=True, to='blog.Tag'),
+            model_name="quotation",
+            name="tags",
+            field=models.ManyToManyField(blank=True, to="blog.Tag"),
         ),
     ]
